@@ -4,11 +4,11 @@ import MainHeader from "./MainHeader";
 
 function MainLayout({ children }) {
   return (
-    <div>
+    <>
       <MainHeader />
       <main>{children}</main>
       <MainFooter />
-    </div>
+    </>
   );
 }
 

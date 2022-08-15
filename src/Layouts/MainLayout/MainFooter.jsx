@@ -4,7 +4,7 @@ import {GiMusicalNotes} from "react-icons/gi"
 
 function MainFooter() {
   return (
-    <footer className="footer p-10 bg-base-200 text-base-content flex flex-row-reverse justify-around">
+    <footer className="footer p-10 bg-base-200 text-base-content flex flex-row-reverse justify-around fixed bottom-0">
       <div className="flex flex-row gap-8 text-right">
         <div className="flex flex-col gap-2">
           <span className="footer-title">قوانین</span>

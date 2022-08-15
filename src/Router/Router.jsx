@@ -1,6 +1,6 @@
 import AdminLayout from "../Layouts/AdminLayout/AdminLayout";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
-import { BrowserRouter, Navigate,  Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import AdminPage from "../Pages/AdminPage/AdminPage";
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import HomePage from "../Pages/HomePage/HomePage";
@@ -16,34 +16,55 @@ import NotFound from "../Pages/NotFound/NotFound";
 function Router() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <MainLayout>
-            <HomePage />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="/admin"
-        element={
-          <AdminLayout>
-            <AdminPage />
-          </AdminLayout>
-        }
-      />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/admin/orders" element={<AdminLayout><Orders /></AdminLayout>}/>
-      <Route path="/admin/stock-price" element={<AdminLayout><StockPriceManagement /></AdminLayout>}/>
-      <Route path="/admin/products" element={<AdminLayout><ProductsManagement /></AdminLayout>}/>
-      <Route path="/finalizing" element={<Finalizing />}/>
-      <Route path="/cart" element={<Cart />}/>
-      <Route path="/payment-result" element={<PaymentResponse />}/>
-      <Route path="/product/:id" element={<Product />}/>
-      <Route path="*" element={<NotFound />}/>
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <HomePage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <AdminLayout>
+              <AdminPage />
+            </AdminLayout>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/admin/orders"
+          element={
+            <AdminLayout>
+              <Orders />
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/admin/stock-price"
+          element={
+            <AdminLayout>
+              <StockPriceManagement />
+            </AdminLayout>
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <AdminLayout>
+              <ProductsManagement />
+            </AdminLayout>
+          }
+        />
+        <Route path="/finalizing" element={<Finalizing />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/payment-result" element={<PaymentResponse />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
