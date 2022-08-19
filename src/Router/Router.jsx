@@ -40,6 +40,7 @@ function Router() {
         />
         <Route
           path="/admin/orders/page/:id"
+          // ?page=1
           element={
             <AdminLayout>
               <Orders />

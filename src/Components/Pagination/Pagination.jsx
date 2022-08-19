@@ -1,34 +1,48 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation, NavLink } from "react-router-dom";
-import { getPage, getProducts, getOrders, getOrdersByPage, getDelivered, getNotDelivered } from "../../api/index";
+import {
+  getPage,
+  getProducts,
+  getOrders,
+  getOrdersByPage,
+  getDelivered,
+  getNotDelivered,
+} from "../../api/index";
 
 function Pagination(props) {
   const activeClassName = "btn btn-xs btn-active";
   const effectRan = useRef(false);
   const [pageNum, setPageNum] = useState(0);
   const [arrLength, setArrLength] = useState(0);
-  const [fil, setFil] = useState(null)
+  const [fil, setFil] = useState(null);
   const [pageButtons, setPageButtons] = useState([]);
-  const [path, setPath] = useState(0)
-  let { pathname } = useLocation();
-  let pathArr = pathname.split('/');
-
-//   const path = pathArr.join('/');
   
+  let { pathname } = useLocation();
+  
+  const [path, setPath] = useState(`${pathname.split('/').slice(0, -1).join('/')}`);
+  // let pathArr = pathname.split("/");
+  // let pathArr2 = pathArr;
+
+  //   const path = pathArr.join('/');
+
   console.log(useLocation());
   //   const currentTab = urlArr[urlArr.length - 1];
   let pageButton = [];
   const createPages = async () => {
-let getFunc = getOrders;
-    if (props.filtering === 'delivered') {
+    let getFunc = getOrders;
+    console.log(pathname.split('/').slice(0, -1).join('/'));
+    console.log(props.filtering);
+    if (props.filtering === "delivered") {
       getFunc = getDelivered;
-    } else if (props.filtering === 'notDelivered') {
+      console.log("delivered");
+    } else if (props.filtering === "notDelivered") {
       getFunc = getNotDelivered;
+      console.log("Not delivered");
     }
 
-    pathArr.pop();
+
     console.log(path);
-    pathArr.join('/') === "/admin/orders/page" &&
+    path === "/admin/orders/page" &&
       (await getFunc()
         .then((data) => {
           return Math.ceil(data.length / 5);
@@ -46,13 +60,13 @@ let getFunc = getOrders;
           // setPageButtons(pageButton);
         }));
 
-        pathArr.join('/') === "/admin/products/page" &&
-        (await getProducts()
+    path === "/admin/products/page" &&
+      (await getProducts()
         .then((data) => {
           return Math.ceil(data.length / 5);
         })
         .then((page) => {
-          console.log(page);
+          console.log({ page });
           for (let i = 1; i <= page; i++) {
             pageButton.push(i);
           }
@@ -63,7 +77,7 @@ let getFunc = getOrders;
           console.log(pageButtons);
           // setPageButtons(pageButton);
         }));
-      pathArr.join('/') === "/admin/stock-price/page" &&
+    path === "/admin/stock-price/page" &&
       (await getProducts()
         .then((data) => {
           return Math.ceil(data.length / 5);
@@ -80,7 +94,7 @@ let getFunc = getOrders;
           console.log(pageButtons);
           // setPageButtons(pageButton);
         }));
-      console.log(pathArr.join('/'));
+    console.log(path);
   };
 
   //   useEffect(() => {}, [pageNum]);
@@ -89,16 +103,20 @@ let getFunc = getOrders;
   //   }, [arrLength]);
 
   useEffect(() => {
-console.log(props.filtering);
-    if (effectRan.current === false) {
-      
-      createPages().then(()=>setPath(pathArr.join('/')));
+    console.log(props.filtering);
+    // if (effectRan.current === false) {
+      console.log(pathname)
+      // console.log(pathArr);
+      createPages()
+      // .then(() => setPath(path));
+      console.log(path)
 
-      effectRan.current = true;
-
-    }
-  });
+    //   effectRan.current = true;
+    // }
+  }, [pathname, props.filtering]);
   console.log(pageButtons);
+  console.log(pathname);
+  // console.log(pathArr);
   console.log(path);
   return (
     <div className="w-full">
@@ -106,10 +124,12 @@ console.log(props.filtering);
         {pageButtons.map((page, index) => {
           return (
             <NavLink
-            to={`${path}/${index+1}`}
-            className={({ isActive }) => (isActive ? activeClassName : "btn btn-xs")}
-              key={`page-${index+1}`}
-              id={`page-${index+1}`}
+              to={`${path}/${index + 1}`}
+              className={({ isActive }) =>
+                isActive ? activeClassName : "btn btn-xs"
+              }
+              key={`page-${index + 1}`}
+              id={`page-${index + 1}`}
               onClick={props.pageClick}
             >
               {page}
