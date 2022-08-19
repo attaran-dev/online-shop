@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getProducts } from "../../api/index";
+import {useParams} from "react-router-dom"
+import { getProducts, getProductsByPage } from "../../api/index";
 import StockPriceRow from "./StockPriceRow";
 
 function StockPriceTable() {
   const [products, setProducts] = useState([]);
+  const {id} = useParams();
   useEffect(() => {
-    getProducts().then((data) => {
+    getProductsByPage(id).then((data) => {
       setProducts(data);
     });
-  }, []);
+  }, [id]);
 
   return (
     <div className="overflow-x-auto w-full mb-8">

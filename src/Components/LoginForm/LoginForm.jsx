@@ -1,4 +1,6 @@
 import React from 'react'
+import {Navigate} from 'react-router-dom'
+
 
 function LoginForm() {
   return (
@@ -7,7 +9,7 @@ function LoginForm() {
             <input type="text" name="username" id="username" className='p-2 border-b-2' />
             <label htmlFor="password">کلمه‌ی عبور:</label>
             <input type="password" name="password" id="password" className='p-2 border-b-2' />
-            <button type="submit" className='bg-gray-100 py-2'>ورود</button>
+            <a href='/admin' type="submit" className='bg-gray-100 py-2 text-center'>ورود</a>
         </form>
   )
 }

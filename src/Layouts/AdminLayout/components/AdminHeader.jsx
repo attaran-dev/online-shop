@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 
 function AdminHeader() {
-  let activeClassName = "tab tab-active";
+  let activeClassName = "tab tab-active text-white";
 
   return (
     <header className="flex justify-between sticky top-0 z-20 bg-white shadow-lg p-6 mb-6">

@@ -36,6 +36,10 @@ function Router() {
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/admin/orders"
+          element={<Navigate to="/admin/orders/page/1" replace />}
+        />
+        <Route
+          path="/admin/orders/page/:id"
           element={
             <AdminLayout>
               <Orders />
@@ -44,6 +48,10 @@ function Router() {
         />
         <Route
           path="/admin/stock-price"
+          element={<Navigate to="/admin/stock-price/page/1" replace />}
+        />
+        <Route
+          path="/admin/stock-price/page/:id"
           element={
             <AdminLayout>
               <StockPriceManagement />
@@ -52,6 +60,10 @@ function Router() {
         />
         <Route
           path="/admin/products"
+          element={<Navigate to="/admin/products/page/1" replace />}
+        />
+        <Route
+          path="/admin/products/page/:id"
           element={
             <AdminLayout>
               <ProductsManagement />

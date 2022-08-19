@@ -3,11 +3,14 @@ import { getUser, getProduct } from "../../api/index";
 
 function OrderRow(props) {
     let [username, setUsername]=useState('');
-    let [priceArr, setPriceArr] = useState([])
+    let [priceArr, setPriceArr] = useState([]);
+    // let [ifDelivered, setIfDelivered] = useState('');
     let products = props.products;
     useEffect(() =>{
         getUser(props.user).then((user) => {
             setUsername(user.username);
+            // user.isDelivered === true && setIfDelivered('تحویل‌شده');
+            // user.isDelivered === false && setIfDelivered('تحویل‌نشده');
         })
         for (let i=0; i<products.length; i++){
             getProduct(products[i]).then((product) => {
@@ -40,6 +43,12 @@ function OrderRow(props) {
       <td>
         <div>
             {date}
+        </div>
+      </td>
+      <td>
+        <div>
+          {props.isDelivered === true && 'تحویل‌شده'}
+          {props.isDelivered === false && 'تحویل‌نشده'}
         </div>
       </td>
       <td>
