@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import './assets/fonts/Gandom.ttf'
 import './assets/fonts/Parastoo.ttf'
 import './assets/fonts/Parastoo-Bold.ttf'
+import 'animate.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
