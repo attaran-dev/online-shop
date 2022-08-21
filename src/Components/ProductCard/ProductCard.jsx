@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import FrameDraw from "../FrameDraw/FrameDraw";
 import "./ProductCard.css";
 
@@ -12,7 +13,7 @@ function ProductCard(props) {
   //     setIsHovering(false);
   //   };
   return (
-
+<Link  to={`/product/${props.model.replaceAll(' ', '-').toLowerCase()}`}>
       <div className="productCard rounded bg-gray-900 w-60 h-96 p-4">
         <div className="m-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.36 21.26">
@@ -53,6 +54,7 @@ function ProductCard(props) {
           <div className="cardPrice text-xs text-base-100">{props.price}<span> تومان </span></div>
         </div>
       </div>
+      </Link>
 
   );
 }

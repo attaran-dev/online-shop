@@ -74,7 +74,7 @@ function Router() {
         <Route path="/finalizing" element={<Finalizing />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment-result" element={<PaymentResponse />} />
-        <Route path="/product/:id" element={<Product />} />
+        <Route path="/product/:id" element={<MainLayout><Product /></MainLayout>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

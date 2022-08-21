@@ -24,12 +24,12 @@ function ProductsCarousel(props) {
     <div className="flex flex-wrap gap-8 absolute top-0">
 {/* <AnimationOnScroll animateIn="animate__fadeInRight"> */}
       {products.map((product, index) => {
-        return <ProductCard key={`${props.value}-${index}`} name={product.name} model={product.model} image={product.image} price={product.price} />;
+        return <AnimationOnScroll animateIn="animate__fadeInRight" duration={2}><ProductCard key={`${props.value}-${index}`} id={index} name={product.name} model={product.model} image={product.image} price={product.price} /></AnimationOnScroll>;
       })}
 
       {/* </AnimationOnScroll> */}
-      <AnimationOnScroll animateIn="animate__fadeIn">
-              <div className="clef animate__animated animate__fadeInRight">
+      <AnimationOnScroll animateIn="animate__fadeIn" duration={3}>
+              <div className="clef">
             <img src={`assets/icons/${(props.id === 1 && `G`) || (props.id === 2 && `C`) || (props.id === 3 && `F`)}Clef.svg`} alt={`Clef-${props.id}`} className={`${(props.id === 1 && `h-96`) || (props.id === 2 && `h-72 translate-y-16`) || (props.id === 3 && `h-72 translate-y-16`)} hover:-rotate-6 transition duration-1000`}/>
         </div>
         </AnimationOnScroll>
