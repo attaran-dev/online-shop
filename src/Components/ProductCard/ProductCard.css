@@ -1,0 +1,12 @@
+.productCard svg path {
+  fill: rgb(204, 153, 0, 0);
+  stroke-dasharray: 449.902 449.902;
+  stroke-dashoffset: 449.902;
+  transition: stroke-dashoffset 3s, fill 2s;
+  /* stroke-width: 1; */
+}
+
+.productCard:hover svg path {
+  fill: #cc9900;
+  stroke-dashoffset: 0;
+}

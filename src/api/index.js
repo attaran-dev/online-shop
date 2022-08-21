@@ -54,3 +54,8 @@ export const getNotDelivered = async () => {
   const res = await HttpService.get(`orders?isDelivered=false`);
   return res.data;
 }
+
+export const getProductsByfilter = async (filter, value, limit) => {
+  const res = await HttpService.get(`products?${filter}=${value}&_limit=${limit}`);
+  return res.data;
+}

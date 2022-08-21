@@ -3,11 +3,11 @@
 @tailwind utilities;
 @font-face {
   font-family: "Parastoo";
-  src: local("Parastoo"), url("./fonts/Parastoo.ttf") format("truetype");
+  src: local("Parastoo"), url("./assets/fonts/Parastoo.ttf") format("truetype");
 }
 @font-face {
   font-family: "Gandom";
-  src: local("Gandom"), url("./fonts/Gandom.ttf") format("truetype");
+  src: local("Gandom"), url("./assets/fonts/Gandom.ttf") format("truetype");
 }
 body {
   margin: 0;
