@@ -59,3 +59,8 @@ code {
   --swiper-theme-color: #cc9900 !important;
   --swiper-navigation-size: 30px !important;
 }
+
+::selection {
+  background-color: #cc9900;
+  color:black
+}

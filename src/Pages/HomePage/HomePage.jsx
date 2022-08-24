@@ -3,12 +3,14 @@ import FrameDraw from '../../Components/FrameDraw/FrameDraw'
 import ProductsCarousel from '../../Components/ProductsCarousel/ProductsCarousel'
 import SideMenu from '../../Components/SideMenu/SideMenu'
 import Slider from '../../Components/Slider/Slider'
+import MainLayout from '../../Layouts/MainLayout/MainLayout'
 
 function HomePage() {
   return (
-
+  <SideMenu>
+<MainLayout>
     <div className='flex flex-col gap-20 justify-center items-center'>
-      {/* <SideMenu /> */}
+      
 
         <Slider />
 
@@ -20,6 +22,8 @@ function HomePage() {
 
       {/* <FrameDraw /> */}
     </div>
+    </MainLayout>
+    </SideMenu>
   )
 }
 

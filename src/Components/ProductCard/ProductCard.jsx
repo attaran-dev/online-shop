@@ -13,7 +13,7 @@ function ProductCard(props) {
   //     setIsHovering(false);
   //   };
   return (
-<Link  to={`/product/${props.model.replaceAll(' ', '-').toLowerCase()}`}>
+<Link  to={`/product/${props.model.replaceAll(' ', '-').toLowerCase()}`} state={{id: props.productId}}>
       <div className="productCard rounded bg-gray-900 w-60 h-96 p-4">
         <div className="m-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.36 21.26">

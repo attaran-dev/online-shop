@@ -59,3 +59,8 @@ export const getProductsByfilter = async (filter, value, limit) => {
   const res = await HttpService.get(`products?${filter}=${value}&_limit=${limit}`);
   return res.data;
 }
+
+export const postProductToCart = async (userId, productData) => {
+  const res = await HttpService.patch(`users/${userId}`, productData);
+  return res.data;
+}

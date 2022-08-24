@@ -7,9 +7,9 @@ function MainHeader() {
     <header className="flex justify-between sticky top-0 z-20 bg-white shadow-lg px-10 mb-6">
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <Link to="/" className="text-xl">
-            <div className="h-full flex flex-col"><p className=" translate-y-6">ملودیکا</p><img src="/assets/icons/logo-2.svg" alt="logo" className="w-20 translate-x-2"/></div>
-          </Link>
+          
+            <div className="h-full flex flex-col"><Link to="/" className="text-xl"><h1 className=" translate-y-6">ملودیکا</h1></Link><label htmlFor="my-drawer-4"><img src="/assets/icons/logo-2.svg" alt="logo" className="w-20 translate-x-2 cursor-pointer hover:scale-[1.3] transition duration-700" /></label></div>
+          
         </div>
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">

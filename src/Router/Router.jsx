@@ -20,9 +20,7 @@ function Router() {
         <Route
           path="/"
           element={
-            <MainLayout>
               <HomePage />
-            </MainLayout>
           }
         />
         <Route
@@ -74,7 +72,7 @@ function Router() {
         <Route path="/finalizing" element={<Finalizing />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment-result" element={<PaymentResponse />} />
-        <Route path="/product/:id" element={<MainLayout><Product /></MainLayout>} />
+        <Route path="/product/:model" element={<Product />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
