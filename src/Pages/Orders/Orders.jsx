@@ -1,5 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsAsync, getProductsAsyncByPage } from "../../redux/products";
 import OrderTable from "../../Components/OrderTable/OrderTable";
 import Pagination from "../../Components/Pagination/Pagination";
 import Filtering from "../../Components/Filtering/Filtering";

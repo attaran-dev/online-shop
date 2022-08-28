@@ -1,4 +1,6 @@
 import React from "react";
+import DeleteModal from "../Modal/DeleteModal";
+import EditModal from "../Modal/EditModal";
 
 function ProductRow(props) {
   return (
@@ -25,9 +27,11 @@ function ProductRow(props) {
         <span className="badge badge-ghost badge-lg">{props.category}</span>
       </td>
       <td>
-        <button className="btn btn-ghost btn-xs">ویرایش</button>
-        <button className="btn btn-ghost btn-xs">حذف</button>
+        <label htmlFor={`edit-modal-${props.id}`} className="btn btn-ghost btn-xs modal-button" id={props.id} onClick={(e)=>console.log(e.target.id)}>ویرایش</label>
+        <label htmlFor={`delete-modal-${props.id}`} className="btn btn-ghost btn-xs modal-button">حذف</label>
       </td>
+      <EditModal pte={props} />
+      <DeleteModal ptd={props}/>
     </tr>
   );
 }

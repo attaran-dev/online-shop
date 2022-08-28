@@ -1,17 +1,42 @@
 import React, { useEffect, useState } from "react";
-import {useParams} from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useSearchParams } from "react-router-dom";
 import { getProducts, getProductsByPage } from "../../api/index";
+import { getProductsAsync } from "../../redux/products";
 import ProductRow from "./ProductRow";
 
 function ProductTable() {
-  const [products, setProducts] = useState([]);
-  const {id} = useParams();
+  // const [products, setProducts] = useState([]);
+  const { products } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const [range, setRange] = useState([]);
+  const [page, setPage] = useState(1);
+  // const { page } = useParams();
+  const [searchParams] = useSearchParams();
+  console.log(searchParams.get("page"));
+
+  const showProducts = (page, limit) => {
+    if (page === null){
+      const pRange = products.slice(0, +limit);
+      setRange(pRange);
+    } else{
+      const pRange = products.slice((+page - 1)*(+limit), ((+page - 1)*(+limit)) + +limit);
+      setRange(pRange);
+    }
+    
+  };
 
   useEffect(() => {
-    getProductsByPage(id).then((data) => {
-      setProducts(data);
-    });
-  }, [id]);
+    // dispatch(getProductsAsync(searchParams.get('page')));
+    console.log(products);
+    // page !== 1 ? setPage(searchParams.get("page")) : setPage(1);
+    showProducts(searchParams.get("page"), 5);
+    console.log(searchParams.get("page"));
+    // getProductsByPage(id).then((data) => {
+    //   setProducts(data);
+    // });
+  }, [page, products, searchParams]);
+
   return (
     <div className="overflow-x-auto w-full mb-8">
       <table className="table w-full">
@@ -28,14 +53,19 @@ function ProductTable() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => {
+          {range.map((product) => {
             return (
               <ProductRow
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 category={product.category}
+                availableQuantity={product.availableQuantity}
+                images={product.images}
+                price={product.price}
                 image={product.image}
                 model={product.model}
+                description={product.description}
               />
             );
           })}

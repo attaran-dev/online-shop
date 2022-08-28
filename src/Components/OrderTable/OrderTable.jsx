@@ -9,7 +9,7 @@ function OrderTable(props) {
     // props.filtering === 'all' && setFilter('')
     // props.filtering === 'delivered' && setFilter('isDelivered=true')
     // props.filtering === 'notDelivered' && setFilter('isDelivered=false')
-    const {id} = useParams();
+    const id = useParams();
     useEffect(() => {
       console.log(props.filtering);
       // props.filtering === 'all' &&

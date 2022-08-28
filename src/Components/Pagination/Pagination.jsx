@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink, useSearchParams } from "react-router-dom";
 import {
   getPage,
   getProducts,
@@ -10,16 +10,24 @@ import {
 } from "../../api/index";
 
 function Pagination(props) {
+  const searchParams = useSearchParams();
+  
   const activeClassName = "btn btn-xs btn-active";
   const effectRan = useRef(false);
-  const [pageNum, setPageNum] = useState(0);
-  const [arrLength, setArrLength] = useState(0);
-  const [fil, setFil] = useState(null);
+  // const [pageNum, setPageNum] = useState(0);
+  // const [arrLength, setArrLength] = useState(0);
+  // const [fil, setFil] = useState(null);
   const [pageButtons, setPageButtons] = useState([]);
   
-  let { pathname } = useLocation();
+  const [pathname, setPathname]  = useState(useLocation().pathname);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleClick = (e) =>{
+    setCurrentPage(e.target.innerHTML);
+  }
   
-  const [path, setPath] = useState(`${pathname.split('/').slice(0, -1).join('/')}`);
+  // const [path, setPath] = useState(`${pathname.split('/').slice(0, -1).join('/')}`);
+
   // let pathArr = pathname.split("/");
   // let pathArr2 = pathArr;
 
@@ -30,7 +38,7 @@ function Pagination(props) {
   let pageButton = [];
   const createPages = async () => {
     let getFunc = getOrders;
-    console.log(pathname.split('/').slice(0, -1).join('/'));
+    // console.log(pathname.split('/').slice(0, -1).join('/'));
     console.log(props.filtering);
     if (props.filtering === "delivered") {
       getFunc = getDelivered;
@@ -41,8 +49,8 @@ function Pagination(props) {
     }
 
 
-    console.log(path);
-    path === "/admin/orders/page" &&
+    console.log(pathname);
+    pathname === "/admin/orders" &&
       (await getFunc()
         .then((data) => {
           return Math.ceil(data.length / 5);
@@ -60,7 +68,7 @@ function Pagination(props) {
           // setPageButtons(pageButton);
         }));
 
-    path === "/admin/products/page" &&
+    pathname === "/admin/products" &&
       (await getProducts()
         .then((data) => {
           return Math.ceil(data.length / 5);
@@ -77,7 +85,7 @@ function Pagination(props) {
           console.log(pageButtons);
           // setPageButtons(pageButton);
         }));
-    path === "/admin/stock-price/page" &&
+    pathname === "/admin/stock-price" &&
       (await getProducts()
         .then((data) => {
           return Math.ceil(data.length / 5);
@@ -94,7 +102,7 @@ function Pagination(props) {
           console.log(pageButtons);
           // setPageButtons(pageButton);
         }));
-    console.log(path);
+    console.log(pathname);
   };
 
   //   useEffect(() => {}, [pageNum]);
@@ -108,29 +116,28 @@ function Pagination(props) {
       console.log(pathname)
       // console.log(pathArr);
       createPages()
+      // setCurrentPage(searchParams.get("page"));
       // .then(() => setPath(path));
-      console.log(path)
+      // const page = searchParams.get('page')
 
-    //   effectRan.current = true;
+      effectRan.current = true;
     // }
-  }, [pathname, props.filtering]);
+  }, [effectRan.current, currentPage, pathname, props.filtering]);
   console.log(pageButtons);
   console.log(pathname);
   // console.log(pathArr);
-  console.log(path);
+  console.log(pathname);
   return (
     <div className="w-full">
       <div className="btn-group" key={`pages-${props.filtering}`}>
         {pageButtons.map((page, index) => {
           return (
             <NavLink
-              to={`${path}/${index + 1}`}
-              className={({ isActive }) =>
-                isActive ? activeClassName : "btn btn-xs"
-              }
+              to={`?page=${index + 1}`}
+              className={`btn btn-xs ${currentPage === `${index + 1}` ? "btn-active" : index+1 === currentPage ? "btn-active": ""}`}
               key={`page-${index + 1}`}
               id={`page-${index + 1}`}
-              onClick={props.pageClick}
+              onClick={handleClick}
             >
               {page}
             </NavLink>

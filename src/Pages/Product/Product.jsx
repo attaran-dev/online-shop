@@ -176,6 +176,7 @@ function Product(props) {
                       src={`${img}`}
                       alt={`${model}-${index + 2}`}
                       className="h-full w-full"
+                      
                     />
                   );
                 })} */}
