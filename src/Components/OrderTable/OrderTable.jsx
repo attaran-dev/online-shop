@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {useParams} from "react-router-dom"
+import {useSearchParams} from "react-router-dom"
 import {getOrders, getOrdersByPage} from "../../api/index"
 import OrderRow from "./OrderRow"
 
@@ -9,7 +9,9 @@ function OrderTable(props) {
     // props.filtering === 'all' && setFilter('')
     // props.filtering === 'delivered' && setFilter('isDelivered=true')
     // props.filtering === 'notDelivered' && setFilter('isDelivered=false')
-    const id = useParams();
+    const [SearchParams] = useSearchParams();
+    const [range, setRange] = useState([]);
+    const [page, setPage] = useState(1);
     useEffect(() => {
       console.log(props.filtering);
       // props.filtering === 'all' &&
@@ -25,19 +27,19 @@ function OrderTable(props) {
       //       setOrders(data);
       //   })
       if (props.filtering === 'delivered') {
-        getOrdersByPage(id, 'isDelivered=true').then((data) => {
+        getOrdersByPage(page, 'isDelivered=true').then((data) => {
           setOrders(data);
         });
       } else if (props.filtering === 'notDelivered') {
-        getOrdersByPage(id, 'isDelivered=false').then((data) => {
+        getOrdersByPage(page, 'isDelivered=false').then((data) => {
           setOrders(data);
         });
       } else {
-        getOrdersByPage(id).then((data) => {
+        getOrdersByPage(page).then((data) => {
           setOrders(data);
         });
       }
-      }, [id, props.filtering]);
+      }, [page, props.filtering]);
   return (
 <div className="overflow-x-auto w-full mb-8">
       <table className="table w-full">

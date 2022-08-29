@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function SideMenu({ children }) {
   return (
     <div
@@ -31,81 +31,81 @@ function SideMenu({ children }) {
           <div className="m-4 font-bold">دسته‌بندی</div>
           {/* <!-- Sidebar content here --> */}
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>پیانو</a>
-            </li>
+            <Link  to="/products/piano">
+              <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700">
+                پیانو
+              </li>
+            </Link>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>گیتار</a>
-            </li>
+            <Link  to="/products/guitar">
+              <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700">
+                گیتار
+              </li>
+            </Link>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>درامز</a>
-            </li>
+            <Link  to="/products/drums">
+              <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700">
+                درامز
+              </li>
+            </Link>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded invisible">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>ویولن</a>
-            </li>
+            <Link  to="/products/bowed-string">
+              <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700">
+                سازهای آرشه‌ای
+              </li>
+            </Link>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>ویولا</a>
-            </li>
+            <Link  to="/products/wind-instrument">
+              <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700">
+                سازهای بادی
+              </li>
+            </Link>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>آکاردئون</a>
-            </li>
+            <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700"> </li>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>هارمونیکا</a>
-            </li>
+            <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700"> </li>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded invisible">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>ترومپت</a>
-            </li>
+            <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700"> </li>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>فلوت</a>
-            </li>
+            <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700"> </li>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>
           </div>
           <div className="relative">
-            <li dir="ltr" className="border-2 rounded">
-              <a>کلارینت</a>
-            </li>
+            <li className="border-2 rounded h-14 text-left justify-center pl-4 hover:bg-base-200 transition duration-700"> </li>
             <div className="w-1/2 h-6 bg-black absolute bottom-0 translate-y-1/2 z-10 flex items-end justify-end rounded invisible">
               <div className="h-0.5 w-5/6 z-30 bg-gradient-to-r from-gray-300 rounded-full -translate-y-1 translate-x-1.5"></div>
             </div>

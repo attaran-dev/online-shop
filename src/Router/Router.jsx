@@ -12,6 +12,7 @@ import Cart from "../Pages/Cart/Cart";
 import PaymentResponse from "../Pages/PaymentResponse/PaymentResponse";
 import Product from "../Pages/Product/Product";
 import NotFound from "../Pages/NotFound/NotFound";
+import CategoryPage from "../Pages/CategoryPage/CategoryPage";
 
 function Router() {
   return (
@@ -24,10 +25,10 @@ function Router() {
           }
         />
 
-          {/* <Route
+          <Route
           path="/products/:category"
-          element={<Category />}
-          /> */}
+          element={<CategoryPage />}
+          />
 
         <Route
           path="/admin"
