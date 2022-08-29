@@ -16,7 +16,7 @@ function ProductsManagement() {
   // const SearchParams = useSearchParams()
   useEffect(() => {
     dispatch(getProductsAsync());
-    dispatch(changeApplied);
+    dispatch(changeApplied(true));
   }, [isChanged]);
   return (
     <div className="flex flex-col gap-4 w-5/6 m-auto">

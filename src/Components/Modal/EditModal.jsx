@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {editProductAsync} from '../../redux/products'
+import {editProductAsync, changeApplied} from '../../redux/products'
+import {editProduct} from "../../api/index"
 
 
 function EditModal({pte}) {
   const [formData, setFormData] = useState({});
   // const [textarea, setTextarea] = useState(pte.description);
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState({})
+  // const [data, setData] = useState({})
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]:`${e.target.value}`})
-    setData({
-      "name": formData.name,
-      "model": formData.model,
-      "category": formData.category,
-      "description": formData.description,
-    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if ((pte.name !== formData.name) || (pte.model !== formData.model) || (pte.category !== formData.category) || (pte.description !== formData.description)){
+      editProduct(pte.id, {
+        name: formData.name,
+      model: formData.model,
+      category: formData.category,
+      description: formData.description
+      })
+    }
+    dispatch(changeApplied(false))
   }
 
   const {isChanged, products} = useSelector((state)=>state.products)
@@ -30,7 +38,7 @@ function EditModal({pte}) {
     setIsOpen(true)
     setFormData(pte);
 
-  }, [data, isChanged, pte, isOpen])
+  }, [pte, isOpen])
   return (
     <div>
 
@@ -42,26 +50,7 @@ function EditModal({pte}) {
 
     <div className="m-4 flex flex-col gap-2">
     <h3 className="text-xl font-bold text-center mb-4">ویرایش محصول</h3>
-    <form className="flex flex-col gap-4" onSubmit={(e)=>{
-      e.preventDefault();
-      // const {name, model, category, description} = e.target;
-      dispatch(editProductAsync(+formData.id, data))
-
-      // console.log({
-      //   id: formData.id,
-      //   name: name.value,
-      //   model: model.value,
-      //   price: formData.price,
-      //   availableQuantity: formData.availableQuantity,
-      //   category: category.value,
-      //   description: description.innerHTML,
-      //   image: formData.image,
-      //   images: formData.images
-      // });
-      setIsOpen(false)
-console.log(products);
-    }
-    } >
+    <form className="flex flex-col gap-4" >
       <div className="flex flex-col gap-2">
 <label htmlFor='product-name'>نام محصول:</label>
 <input type="text" name="name" id="product-name"  value={formData.name} onChange={handleChange} className="p-2 border"/>
@@ -89,7 +78,7 @@ console.log(products);
   <label htmlFor="product-description">توضیحات محصول:</label>
   <textarea name="description" id="product-description" cols="15" rows="5" className='p-2 text-sm border' value={formData.description} onChange={handleChange} />
 </div>
-<input type="submit" value="ثبت" className='btn btn-primary'/>
+<label htmlFor={`edit-modal-${pte.id}`} className='btn btn-primary' onClick={handleSubmit}>ثبت</label>
     </form>
     </div>
   </div>

@@ -37,7 +37,8 @@ export const productsSlice = createSlice({
   initialState: {
     products: [],
     selectedProduct: {},
-    isChanged: false,
+    isChanged: true,
+    isSaveClicked:false
   },
   reducers: {
     // editProduct: (state, action) => {
@@ -46,9 +47,12 @@ export const productsSlice = createSlice({
 
     //     state.products.splice(index, 1, +action.payload);
     // },
-    changeApplied: (state) => {
-      state.isChanged = false;
+    changeApplied: (state, action) => {
+      state.isChanged = action.payload;
     },
+    saveClick: (state, action) =>{
+      state.isSaveClicked = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getProductsAsync.fulfilled, (state, action) => {
@@ -66,6 +70,6 @@ export const productsSlice = createSlice({
     });
   },
 });
-export const { changeApplied } = productsSlice.actions;
+export const { changeApplied, saveClick } = productsSlice.actions;
 
 export default productsSlice.reducer;

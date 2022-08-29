@@ -54,6 +54,7 @@ function StockPriceTable() {
             return (
               <StockPriceRow
                 key={product.id}
+                id={product.id}
                 name={product.name}
                 model={product.model}
                 price={product.price}
