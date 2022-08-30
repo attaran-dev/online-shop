@@ -1,5 +1,6 @@
 import HttpService from "../services/services";
 
+
 export const getUsers = async () => {
   const res = await HttpService.get("users");
   return res.data;
@@ -69,7 +70,21 @@ export const deleteProduct = async(productId)=>{
   const res = await HttpService.delete(`products/${productId}`);
   return res.data;
 }
+
 export const editProduct = async (productId, productData) => {
   const res = await HttpService.patch(`products/${productId}`, productData);
   return res.data;
 }
+
+export const addProduct = async (productData) => {
+  const res = await HttpService.post(`products/${productData}`);
+  return res.data;
+}
+
+// export const upImage = async (img) => {
+// await HttpService.post('upload', upload.single('image'), function (req, res, next) {
+//   // req.file is the `image` file
+//   // req.body will hold the text fields, if there were any
+//   return res.json(req.file)
+// })
+// }

@@ -9,6 +9,7 @@ import {
   getProductsAsyncByPage,
 } from "../../redux/products";
 import { useSearchParams } from "react-router-dom";
+import AddModal from "../../Components/Modal/AddModal";
 
 function ProductsManagement() {
   const { products, isChanged } = useSelector((state) => state.products);
@@ -22,7 +23,8 @@ function ProductsManagement() {
     <div className="flex flex-col gap-4 w-5/6 m-auto">
       <div className="flex flex-row justify-between items-center">
         <div>
-          <button className="btn btn-primary">افزودن کالا</button>
+          <label htmlFor="add-modal" className="btn btn-primary" >افزودن کالا</label>
+          <AddModal />
         </div>
         <div>مدیریت کالاها</div>
         <div>
