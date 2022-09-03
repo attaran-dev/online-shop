@@ -1,112 +1,86 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getProduct, postProductToCart, getUser } from "../../api/index";
 import { useLocation, useParams } from "react-router-dom";
 import MainLayout from "../../Layouts/MainLayout/MainLayout";
 import SideMenu from "../../Components/SideMenu/SideMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCartAsync, decreaseCartAsync, changeApplied } from "../../redux/cart";
 
-function Product(props) {
+function Product() {
+  const productsInCart = useSelector((state) => state?.cart?.productsInCart);
+
   const location = useLocation();
   const model = useParams();
   const { id } = location.state;
   const [product, setProduct] = useState({});
-  const [otherImages, setOtherImages] = useState([]);
+  const [user, setUser] = useState({});
+
+  const [currentProductCart, setCurrentProductCart]= useState({});
+
+  //   const currentProductCart = useMemo(() => {
+  //   return productsInCart?.find((value) => value.productId == product.id);
+  // }, [productsInCart, product]);
+
+  const dispatch = useDispatch();
+
+
+  // const handleChange = (e) => {};
+
+ const findCurrentProductInCart = async () =>{
+  const currentProduct = await productsInCart?.find((value) => value.productId == product.id);
+  // if(currentProduct.quantity.length > 0){
+  //   document.getElementById('add-to-cart-btn').classList.add('hidden');
+  //   document.getElementById("order-number").classList.remove('hidden');
+  // }
+  return currentProduct;
+ }
   const [quantity, setQuantity] = useState(0);
-  const [primaryCart, setprimaryCart] = useState([getUser(10)]);
-  // const [numProductInCart, setNumProductInCart] = useState("");
+
+
+  const createProductPage = async () => {};
+
+  useEffect(() => {
+    getProduct(id).then((productItem) => setProduct(productItem));
+    getUser(10).then((user) => setUser(user));
+    findCurrentProductInCart()
+    .then((currentProduct)=>{setCurrentProductCart(currentProduct);setQuantity(currentProduct.quantity)})
+  }, [currentProductCart, productsInCart]);
+
 
   const handleClickAddToCart = () => {
-    document.getElementById("order-number").classList.remove("hidden");
-    document.getElementById("add-to-cart-btn").classList.add("hidden");
-    setQuantity(1);
+    
+    document.getElementById('add-to-cart-btn').classList.add('hidden');
+    document.getElementById("order-number").classList.remove('hidden');
+
+    let tempQuantity = +currentProductCart?.quantity;
+    dispatch(addToCartAsync({ user, product }));
+    setQuantity(++tempQuantity)
   };
 
   const handleClickSimpleAdd = () => {
-    let tempQuantity = +quantity;
-    setQuantity(++tempQuantity);
+    let tempQuantity = +currentProductCart?.quantity;
+    dispatch(addToCartAsync({ user, product }));
+    setQuantity(++tempQuantity)
   };
 
   const handleClickDecrease = () => {
-    getUser(10).then((user) => postProductToCart(10, { cart: [] }));
     let tempQuantity = +quantity;
-    tempQuantity === 1 &&
+    if(tempQuantity === 1){
       document.getElementById("order-number").classList.add("hidden");
-    tempQuantity === 1 &&
-      document.getElementById("add-to-cart-btn").classList.remove("hidden");
-    setQuantity(--tempQuantity);
+      document.getElementById('add-to-cart-btn').classList.remove('hidden');
+    }
+    setQuantity(--tempQuantity)
+    
+    dispatch(decreaseCartAsync({ user, product }));
+    dispatch(changeApplied())
+
   };
 
-  const handleChange = (e) => {
-    // setQuantity(e.target.value);
-    console.log(e.target.value);
-  };
 
-  // const handleClick = () => {
-  //   const productInCart = {
-  //     productId: product.id,
-  //     productName: product.name,
-  //     productModel: product.model,
-  //     quantity: quantity,
-  //     price: product.price,
-  //   };
-  //   getUser(10).then((user) =>
-  //   postProductToCart(10, { cart: [...user.cart, productInCart] })
-  // );
 
-  // };
 
-  const createProductPage = async () => {
-    await getProduct(id).then((productItem) => setProduct(productItem));
-    // .then(() => setOtherImages([...product.images]));
-  };
-
-  useEffect(() => {
-    createProductPage();
-    const productInCart = {
-      productId: product.id,
-      productName: product.name,
-      productModel: product.model,
-      quantity: document.getElementById("quantity").value,
-      price: product.price,
-    };
-    getUser(10).then((user) => {
-      console.log(user.cart.length);
-      if (+quantity > 0) {
-        console.log("firstif");
-        if (user.cart.length === 0) {
-          console.log("secondif");
-          postProductToCart(10, { cart: [productInCart] });
-        } else if (user.cart.length > 0) {
-          console.log("thirdif");
-          for (let i = 0; i <= user.cart.length; i++) {
-            if (+user.cart[i].productId === +product.id) {
-              user.cart.splice(i, 1, productInCart);
-              console.log("fourthif");
-              postProductToCart(10, {
-                cart: user.cart
-              });
-            } else {
-              console.log("fifthif");
-              postProductToCart(10, { cart: [...user.cart, productInCart] });
-            }
-          }
-        }
-      } else {
-        // postProductToCart(10, { cart: [...primaryCart.cart] });
-        if (user.cart.length > 0) {
-          for (let i = 0; i <= user.cart.length; i++) {
-            if (+user.cart[i].productId === +product.id) {
-              user.cart.splice(i, 1);
-              postProductToCart(10, {
-                cart: user.cart
-              });
-            }
-          }
-        }
-      }
-      // postProductToCart(10, { cart: [] })
-    });
-    // console.log(otherImages)
-  }, [quantity]);
+  
+  console.log({ currentProductCart, product, productsInCart, id });
 
   return (
     <SideMenu>
@@ -121,38 +95,49 @@ function Product(props) {
                 id="cart-handling"
                 className="flex justify-center items-center gap-4"
               >
-                <div id="order-number" className="hidden h-12 flex gap-2 justify-center">
-                  <span
-                    className=" btn btn-primary"
-                    onClick={handleClickSimpleAdd}
+                                {(
+                  <div
+                    id="add-to-cart-btn"
+                    className={`btn btn-primary`}
+                    onClick={handleClickAddToCart}
                   >
-                    +
-                  </span>
-                  <input
-                    type="text"
-                    name="quantity"
-                    id="quantity"
-                    // min={1}
-                    // max={product.availableQuantity}
-                    className="h-full rounded-lg p-4 w-16"
-                    value={quantity}
-                    onChange={(e) => handleChange(e)}
-                  />
+                    افزودن به سبد
+                  </div>
+                )}
 
-                  <span
-                    className="btn btn-primary"
-                    onClick={handleClickDecrease}
+                {
+                // currentProductCart?.quantity  && 
+                (
+                  <div
+                    id="order-number"
+                    className="h-12 flex gap-2 justify-center hidden"
                   >
-                    -
-                  </span>
-                </div>
-                <div
-                  id="add-to-cart-btn"
-                  className="btn btn-primary"
-                  onClick={handleClickAddToCart}
-                >
-                  افزودن به سبد
-                </div>
+                    <span
+                      className={`font-bold text-lg btn btn-primary ${currentProductCart?.quantity == product?.availableQuantity ? `btn-disabled` : null}`}
+                      onClick={()=>handleClickSimpleAdd()}
+                    >
+                      +
+                    </span>
+                    <input
+                      type="text"
+                      name="quantity"
+                      id="quantity"
+                      min={1}
+                      max={product.availableQuantity}
+                      className="h-full rounded-lg p-4 w-16"
+                      value={quantity}
+                      // onChange={(e) => handleChange(e)}
+                    />
+
+                    <span
+                      className="btn btn-primary"
+                      onClick={()=>handleClickDecrease()}
+                    >
+                      -
+                    </span>
+                  </div>
+                )}
+
               </div>
             </div>
 
@@ -165,10 +150,8 @@ function Product(props) {
                 />
               </div>
               <div className="product-images h-28 flex">
-                {console.log(otherImages)}
-                {otherImages.map((img) => {
-                  return `${img}`;
-                })}
+                {/* {console.log(otherImages)} */}
+
                 {/* {product.images.map((img, index) => {
                   console.log(product.images);
                   return (
