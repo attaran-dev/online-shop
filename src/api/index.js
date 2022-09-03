@@ -81,6 +81,16 @@ export const addProduct = async (productData) => {
   return res.data;
 }
 
+// export const getCart = async (userId) => {
+// const res = await HttpService.get(`users/${userId}`);
+// return res.data;
+// }
+
+export const changeCart = async (userId, productId)=>{
+const res = await HttpService.post(`users/${userId}`);
+return res.data;
+}
+
 // export const upImage = async (img) => {
 // await HttpService.post('upload', upload.single('image'), function (req, res, next) {
 //   // req.file is the `image` file

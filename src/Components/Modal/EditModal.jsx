@@ -5,10 +5,31 @@ import {editProduct} from "../../api/index"
 
 
 function EditModal({pte}) {
+  const [uploadedFiles, setUploadedFiles] = useState([])
+
   const [formData, setFormData] = useState({});
   // const [textarea, setTextarea] = useState(pte.description);
   const [isOpen, setIsOpen] = useState(false);
   // const [data, setData] = useState({})
+
+
+  const handleFileChange = (e) =>{
+    const chosenFiles= Array.prototype.slice.call(e.target.files)
+    console.log(chosenFiles);
+    handleUploadFiles(chosenFiles);
+  }
+  
+  const handleUploadFiles = (files) =>{
+    setUploadedFiles(files);
+    const uploaded = [...uploadedFiles];
+  files.some((file) => {
+      uploaded.push(file);
+  })
+  setUploadedFiles(uploaded);
+  console.log(uploadedFiles);
+  }
+  
+
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]:`${e.target.value}`})
   }
@@ -20,7 +41,9 @@ function EditModal({pte}) {
         name: formData.name,
       model: formData.model,
       category: formData.category,
-      description: formData.description
+      description: formData.description,
+      image: uploadedFiles[0],
+      images: uploadedFiles.slice(1, uploadedFiles.length)
       })
     }
     dispatch(changeApplied(false))
@@ -37,8 +60,9 @@ function EditModal({pte}) {
     console.log(products);
     setIsOpen(true)
     setFormData(pte);
-
-  }, [pte, isOpen])
+    console.log(uploadedFiles.slice(1, uploadedFiles.length));
+    console.log()
+  }, [uploadedFiles, isOpen])
   return (
     <div>
 
@@ -50,7 +74,8 @@ function EditModal({pte}) {
 
     <div className="m-4 flex flex-col gap-2">
     <h3 className="text-xl font-bold text-center mb-4">ویرایش محصول</h3>
-    <form className="flex flex-col gap-4" >
+    <form className="flex gap-8" >
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
 <label htmlFor='product-name'>نام محصول:</label>
 <input type="text" name="name" id="product-name"  value={formData.name} onChange={handleChange} className="p-2 border"/>
@@ -78,8 +103,48 @@ function EditModal({pte}) {
   <label htmlFor="product-description">توضیحات محصول:</label>
   <textarea name="description" id="product-description" cols="15" rows="5" className='p-2 text-sm border' value={formData.description} onChange={handleChange} />
 </div>
-<label htmlFor={`edit-modal-${pte.id}`} className='btn btn-primary' onClick={handleSubmit}>ثبت</label>
+
+
+</div>
+<div className="flex flex-col gap-2">
+      <p>تصاویر کالا:</p>
+      <label htmlFor="edit-product-image" className="text-sm btn btn-primary">
+        انتخاب تصاویر
+      </label>
+      <div>
+    <input type="file" name="image" id="edit-product-image" multiple onChange={handleFileChange} className="w-1/2 hidden"/>
+      </div>
+      <hr />
+{ uploadedFiles.length > 0 &&
+  <div className='flex gap-2 flex-col'>
+  <p className='text-sm'>پیش‌نمایش تصاویر انتخاب‌شده</p>
+  <div>
+    <p>تصویر اصلی</p>
+    <div>
+      {<img src={URL.createObjectURL(uploadedFiles[0])} alt={uploadedFiles[0].name} className="rounded h-1/3 object-cover" /> }
+    </div>
+  </div>
+<div>
+
+    <p>
+      سایر تصاویر
+    </p>
+  <div className='flex gap-2 flex-wrap'>
+  
+{uploadedFiles.map((file, index )=> (
+        <div>
+            <img src={URL.createObjectURL(file)} alt={file.name} className={`w-10 h-10 rounded object-cover ${index===0?`hidden`:null}`} />
+        </div>
+    ))}
+</div>
+</div>
+</div>
+}
+    </div>
+
     </form>
+<label htmlFor={`edit-modal-${pte.id}`} className='btn btn-primary' onClick={handleSubmit}>ثبت</label>
+    
     </div>
   </div>
 </div>

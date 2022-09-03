@@ -1,15 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getUser } from "../../api";
 import SideMenu from "../../Components/SideMenu/SideMenu";
+import { cartSummary, changeApplied, getCart } from "../../redux/cart";
 
 function MainHeader() {
+  const {isChanged , productsInCart} = useSelector((state) => state?.cart);
+  const [cartSummary, setCartSummary] = useState({});
+  const cartSummaryCalc = async () => {
+const user = await getUser(10);
+const {cart} = user;
+let cartLength = cart.length;
+      let cartQuantity = 0;
+    let cartPriceSum = 0;
+  for (let i = 0; i < cart.length; i++) {
+
+    cartQuantity += (+cart[i].quantity);
+    cartPriceSum +=
+      (+cart[i].price * +cart[i].quantity);
+  }
+  setCartSummary({cartQuantity, cartPriceSum, cartLength})
+}
+useEffect(()=>{
+  cartSummaryCalc()
+},[productsInCart, isChanged])
+
   return (
     <header className="flex justify-between sticky top-0 z-20 bg-white shadow-lg px-10 mb-6">
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          
-            <div className="h-full flex flex-col"><Link to="/" className="text-xl"><h1 className=" translate-y-6">ملودیکا</h1></Link><label htmlFor="my-drawer-4"><img src="/assets/icons/logo-2.svg" alt="logo" className="w-20 translate-x-2 cursor-pointer hover:scale-[1.3] transition duration-700" /></label></div>
-          
+          <div className="h-full flex flex-col">
+            <Link to="/" className="text-xl">
+              <h1 className=" translate-y-6">ملودیکا</h1>
+            </Link>
+            <label htmlFor="my-drawer-4">
+              <img
+                src="/assets/icons/logo-2.svg"
+                alt="logo"
+                className="w-20 translate-x-2 cursor-pointer hover:scale-[1.3] transition duration-700"
+              />
+            </label>
+          </div>
         </div>
         <div className="flex-none gap-2">
           <div className="dropdown dropdown-end">
@@ -53,7 +85,9 @@ function MainHeader() {
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                   />
                 </svg>
-                <span className="badge badge-sm indicator-item">۲</span>
+                <span className="badge badge-sm indicator-item">
+                  {cartSummary.cartQuantity}
+                </span>
               </div>
             </label>
             <div
@@ -64,15 +98,13 @@ function MainHeader() {
                 <span className="font-bold text-lg flex gap-1">
                   {/* <span>۲</span>
                   <span>کالا</span> */}
-                  ۲ کالا
+                  {cartSummary.cartLength} کالا
                 </span>
-                <span className="text-info">
-                  جمع: ۴۵۰۰۰۰۰ تومان
-                </span>
+                <span className="text-primary font-bold">جمع: {cartSummary.cartPriceSum} تومان</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
+                  <Link to="/cart" className="btn btn-primary btn-block">
                     سبد خرید
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
