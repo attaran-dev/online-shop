@@ -10,6 +10,7 @@ import {
 } from "../../redux/products";
 import { useSearchParams } from "react-router-dom";
 import AddModal from "../../Components/Modal/AddModal";
+import { Toaster } from "react-hot-toast";
 
 function ProductsManagement() {
   const { products, isChanged } = useSelector((state) => state.products);
@@ -17,7 +18,6 @@ function ProductsManagement() {
   // const SearchParams = useSearchParams()
   useEffect(() => {
     dispatch(getProductsAsync());
-    dispatch(changeApplied(true));
   }, [isChanged]);
   return (
     <div className="flex flex-col gap-4 w-5/6 m-auto">

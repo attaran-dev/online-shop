@@ -4,6 +4,7 @@ import { getUser } from '../../api';
 import CheckoutModal from '../Modal/CheckoutModal';
 
 function CartSide({cartSummary}) {
+
 //     const [cartSummary, setCartSummary] = useState({});
 //     const cartSummaryCalc = async () => {
 // const user = await getUser(10);
@@ -29,7 +30,7 @@ function CartSide({cartSummary}) {
         <div  className="font-extrabold text-sm">  {cartSummary.cartPriceSum} تومان</div>
         <div>
         <label htmlFor={`checkout-modal`} className="btn btn-primary modal-button w-full">نهایی‌کردن سفارش</label>
-        <CheckoutModal />
+        <CheckoutModal cart={cartSummary.cart} />
         </div>
     </div>
   )

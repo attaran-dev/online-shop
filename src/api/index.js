@@ -1,4 +1,5 @@
 import HttpService from "../services/services";
+import { useNavigate } from "react-router-dom";
 
 
 export const getUsers = async () => {
@@ -91,10 +92,25 @@ const res = await HttpService.post(`users/${userId}`);
 return res.data;
 }
 
-// export const upImage = async (img) => {
-// await HttpService.post('upload', upload.single('image'), function (req, res, next) {
-//   // req.file is the `image` file
-//   // req.body will hold the text fields, if there were any
-//   return res.json(req.file)
-// })
-// }
+export const addOrder = async (order) => {
+  const res = await HttpService.post(`orders/`, order );
+  return res.data;
+}
+
+export const changeOrder = async (orderId, data) => {
+  const res = await HttpService.patch(`orders/${orderId}`, data );
+  return res.data;
+}
+
+export const login = async (user) => {
+  const res = await HttpService.post(`auth/login`, user )
+
+  return res.data.token;
+}
+
+export const postImage = async (image) => {
+const {req, res} = await HttpService.post(`upload/`, image);
+console.log(req);
+console.log(res);
+return {req,res};
+}

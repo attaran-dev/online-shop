@@ -143,7 +143,10 @@ function EditModal({pte}) {
     </div>
 
     </form>
-<label htmlFor={`edit-modal-${pte.id}`} className='btn btn-primary' onClick={handleSubmit}>ثبت</label>
+    <button className='btn btn-primary' onClick={handleSubmit}>
+
+<label htmlFor={`edit-modal-${pte.id}`} className="w-full h-full flex self-center items-center  cursor-pointer"><p className="w-full text-center" >ثبت</p></label>
+    </button>
     
     </div>
   </div>

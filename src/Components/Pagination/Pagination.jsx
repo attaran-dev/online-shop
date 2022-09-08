@@ -119,7 +119,6 @@ function Pagination(props) {
       // setCurrentPage(searchParams.get("page"));
       // .then(() => setPath(path));
       // const page = searchParams.get('page')
-
       effectRan.current = true;
     // }
   }, [effectRan.current, currentPage, pathname, props.filtering]);

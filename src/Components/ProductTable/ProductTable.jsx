@@ -7,7 +7,7 @@ import ProductRow from "./ProductRow";
 
 function ProductTable() {
   // const [products, setProducts] = useState([]);
-  const { products } = useSelector((state) => state.products);
+  const { products, isChanged } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [range, setRange] = useState([]);
   const [page, setPage] = useState(1);

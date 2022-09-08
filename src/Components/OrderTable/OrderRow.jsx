@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { getUser, getProduct } from "../../api/index";
+import CheckOrderModal from "../Modal/CheckOrderModal";
 
-function OrderRow(props) {
-    let [username, setUsername]=useState('');
-    let [priceArr, setPriceArr] = useState([]);
+function OrderRow({order}) {
+    const [sumPrice, setSumPrice] = useState(0);
     // let [ifDelivered, setIfDelivered] = useState('');
-    let products = props.products;
     useEffect(() =>{
-        getUser(props.user).then((user) => {
-            setUsername(user.username);
+        // getUser(props.user).then((user) => {
+        //     setUsername(user.username);
             // user.isDelivered === true && setIfDelivered('تحویل‌شده');
             // user.isDelivered === false && setIfDelivered('تحویل‌نشده');
-        })
-        for (let i=0; i<products.length; i++){
-            getProduct(products[i]).then((product) => {
-                setPriceArr(...priceArr, product.price);
-                
-            })
-        }
-        console.log(priceArr);
-    }, [])
+        // })
+        let sum = 0;
+      for (const item of order.cart) {
+        sum += (+item.quantity)*(+item.price)
+      }
+      setSumPrice(sum);
 
-  
-  let sum = '';
-  for (let value of priceArr) {
-    sum += value;
-  }
-  let date = props.orderDate.replaceAll('-', '/')
+    }, [sumPrice])
+
+
   return (
     <tr>
       <th>
@@ -35,24 +28,25 @@ function OrderRow(props) {
         </label>
       </th>
       <td>
-        <div>{username}</div>
+        <div>{order.firstname} {order.lastname}</div>
       </td>
       <td>
-        <div> {sum} تومان </div>
+        <div> {sumPrice} تومان </div>
       </td>
       <td>
         <div>
-            {date}
+            {order.pickedDate}
         </div>
       </td>
       <td>
         <div>
-          {props.isDelivered === true && 'تحویل‌شده'}
-          {props.isDelivered === false && 'تحویل‌نشده'}
+          {order.isDelivered === true && 'تحویل‌شده'}
+          {order.isDelivered === false && 'تحویل‌نشده'}
         </div>
       </td>
       <td>
-        <button className="btn btn-ghost btn-xs">بررسی سفارش</button>
+        <label htmlFor={`check-order-modal-${order.id}`} className="btn btn-ghost btn-xs" >بررسی سفارش</label>
+        <CheckOrderModal order={order} />
       </td>
     </tr>
   );

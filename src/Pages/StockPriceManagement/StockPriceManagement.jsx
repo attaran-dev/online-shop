@@ -12,7 +12,7 @@ function StockPriceManagement() {
     dispatch(getProductsAsync())
     console.log(isSaveClicked);
     
-  },[products])
+  },[isSaveClicked])
   return (
     <div className="flex flex-col gap-4 w-5/6 m-auto">
       <div className="flex justify-between items-center">

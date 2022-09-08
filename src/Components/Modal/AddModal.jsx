@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {editProductAsync, changeApplied} from '../../redux/products'
-import {addProduct} from "../../api/index"
+import {addProduct, postImage} from "../../api/index"
 
 
 
@@ -31,7 +31,12 @@ console.log(uploadedFiles);
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]:`${e.target.value}`})
   }
-
+ const handleImage = async () =>{
+const {req, res} = await postImage(uploadedFiles[0]);
+console.log(res);
+console.log(req);
+  console.log(uploadedFiles[0]);
+ }
   const handleSubmit = (e) => {
     e.preventDefault();
     addProduct({
@@ -43,7 +48,7 @@ console.log(uploadedFiles);
       images: uploadedFiles.slice(1, uploadedFiles.length)
       })
 
-    dispatch(changeApplied(false))
+    dispatch(changeApplied())
   }
 
   const {isChanged, products} = useSelector((state)=>state.products)
@@ -58,7 +63,7 @@ console.log(uploadedFiles);
     setIsOpen(true)
     console.log(uploadedFiles.slice(1, uploadedFiles.length));
 console.log()
-  }, [uploadedFiles, isOpen])
+  }, [isChanged, uploadedFiles, isOpen])
   return (
     <div>
 
@@ -137,7 +142,13 @@ console.log()
 }
     </div>
     </form>
-    <label htmlFor={`add-modal`} className='btn btn-primary' onClick={handleSubmit}>ثبت</label>
+    <button className='btn btn-primary' onClick={handleSubmit}>
+
+<label htmlFor={`add-modal`} className="w-full h-full flex self-center items-center  cursor-pointer"><p className="w-full text-center" >ثبت</p></label>
+    </button>
+    {/* <button className='btn btn-primary' onClick={handleImage}>
+      ثبت تصویر
+    </button> */}
     </div>
   </div>
 </div>

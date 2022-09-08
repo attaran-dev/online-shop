@@ -47,9 +47,9 @@ export const productsSlice = createSlice({
 
     //     state.products.splice(index, 1, +action.payload);
     // },
-    changeApplied: (state, action) => {
-      state.isChanged = action.payload;
-    },
+    changeApplied: (state) => {
+      state.isChanged = !state.isChanged;
+  },
     saveClick: (state, action) =>{
       state.isSaveClicked = action.payload;
     }

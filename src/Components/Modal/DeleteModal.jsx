@@ -1,10 +1,27 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsAsync, getProductsAsyncByPage, deleteProductAsync } from "../../redux/products";
+import { getProductsAsync, getProductsAsyncByPage, deleteProductAsync, changeApplied } from "../../redux/products";
 
 function DeleteModal({ ptd }) {
   const [isOpen, setIsOpen] = useState(false);
   const { products } = useSelector((state) => state.products);
+  const handleDelete = () =>{
+    dispatch(deleteProductAsync(ptd.id));
+    dispatch(changeApplied());
+    setTimeout(()=>{
+toast.success(`«${ptd.name}» حذف شد`, {
+  duration: 4000,
+  style: {
+    backgroundColor: "#111827",
+    color: "white"
+  },
+  iconTheme: {
+    primary: '#cc9900'}
+})
+    }, 500)
+    
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     setIsOpen(true);
@@ -31,10 +48,12 @@ function DeleteModal({ ptd }) {
           <div className="flex m-4 flex-col gap-2 text-center">
             <div>مطمئنید می‌خواهید حذف کنید؟</div>
             <div className="m-4 flex gap-2 justify-center">
-              <button className="btn btn-primary" onClick={()=>dispatch(deleteProductAsync(ptd.id))}>حذف</button>
+              <button className="btn btn-primary" onClick={handleDelete}>
+              <label htmlFor={`delete-modal-${ptd.id}`} className="w-full h-full flex self-center items-center  cursor-pointer"><p className="w-full text-center" >حذف</p></label>
+
+              </button>
               <label
                 className="btn btn-primary"
-                // onClick={() => setIsOpen(false)}
                 htmlFor={`delete-modal-${ptd.id}`}
               >
                 لغو

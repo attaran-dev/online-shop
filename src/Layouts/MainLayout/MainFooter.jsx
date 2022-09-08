@@ -34,8 +34,12 @@ function MainFooter() {
       </div>
 
       <div>
-        <GiMusicalNotes className="text-5xl"/>
-        <p>ملودیکا</p>
+      <img
+                src="/assets/icons/logo-2.svg"
+                alt="logo"
+                className="w-28 translate-x-8"
+              />
+        <p className="-translate-y-8">ملودیکا</p>
       </div>
     </footer>
   );

@@ -5,8 +5,10 @@ import { getProductsAsync, getProductsAsyncByPage } from "../../redux/products";
 import OrderTable from "../../Components/OrderTable/OrderTable";
 import Pagination from "../../Components/Pagination/Pagination";
 import Filtering from "../../Components/Filtering/Filtering";
+import { useNavigate } from "react-router-dom";
 
 function Orders() {
+  const navigate = useNavigate()
   const [selectValue, setSelectValue] = useState("");
   const [filter, setFilter] = useState("");
 useEffect(()=>{
@@ -17,6 +19,7 @@ useEffect(()=>{
     console.log(e.target.value);
   //  setSelectValue(e.target.value)
   setFilter(e.target.value)
+navigate('/admin/orders?page=1')
       
     
     

@@ -24,7 +24,7 @@ function ProductRow(props) {
         </div>
       </td>
       <td>
-        <span className="badge badge-ghost badge-lg">{props.category}</span>
+        <span className="badge badge-ghost badge-lg text-sm">{props.category}</span>
       </td>
       <td>
         <label htmlFor={`edit-modal-${props.id}`} className="btn btn-ghost btn-xs modal-button" id={props.id} onClick={(e)=>console.log(e.target.id)}>ویرایش</label>

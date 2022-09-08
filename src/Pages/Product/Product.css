@@ -1,0 +1,80 @@
+#svg-1 svg path {
+  fill: rgb(204, 153, 0, 0);
+  stroke-dasharray: 1400 1400;
+  stroke-dashoffset: 1400;
+  transition: stroke-dashoffset 3s, stroke-width 3s, fill 2s;
+
+}
+
+#middle-col:hover #svg-1 svg path {
+  /* fill: #cc9900; */
+  stroke-dashoffset: 700;
+  stroke-width: 3;
+}
+
+#svg-2 svg path {
+  fill: rgb(204, 153, 0, 0);
+  stroke-dasharray: 1400 1400;
+  stroke-dashoffset: 1400;
+  transition: stroke-dashoffset 3s, stroke-width 3s, fill 2s;
+  /* stroke-width: 1; */
+}
+
+#middle-col:hover #svg-2 svg path {
+  /* fill: #cc9900; */
+  stroke-dashoffset: 700;
+  stroke-width: 3;
+}
+
+
+#first-col #svg-1 svg path {
+    fill: rgb(204, 153, 0, 0);
+    stroke-dasharray: 1400 1400;
+    stroke-dashoffset: 1400;
+    transition: stroke-dashoffset 3s, stroke-width 3s, fill 2s;
+}
+
+#first-col:hover #svg-1 svg path {
+    stroke-dashoffset: 700;
+    stroke-width: 3;
+    /* stroke-width: 1; */
+}
+
+#first-col #svg-2 svg path {
+    fill: rgb(204, 153, 0, 0);
+    stroke-dasharray: 1400 1400;
+    stroke-dashoffset: 1400;
+    transition: stroke-dashoffset 3s, stroke-width 3s, fill 2s;
+}
+
+#first-col:hover #svg-2 svg path {
+    stroke-dashoffset: 700;
+    stroke-width: 3;
+    /* stroke-width: 1; */
+}
+
+#third-col #svg-1 svg path {
+    fill: rgb(204, 153, 0, 0);
+    stroke-dasharray: 1400 1400;
+    stroke-dashoffset: 1400;
+    transition: stroke-dashoffset 3s, stroke-width 3s, fill 2s;
+}
+
+#third-col:hover #svg-1 svg path {
+    stroke-dashoffset: 700;
+    stroke-width: 3;
+    /* stroke-width: 1; */
+}
+
+#third-col #svg-2 svg path {
+    fill: rgb(204, 153, 0, 0);
+    stroke-dasharray: 1400 1400;
+    stroke-dashoffset: 1400;
+    transition: stroke-dashoffset 3s, stroke-width 3s, fill 2s;
+}
+
+#third-col:hover #svg-2 svg path {
+    stroke-dashoffset: 700;
+    stroke-width: 3;
+    /* stroke-width: 1; */
+}

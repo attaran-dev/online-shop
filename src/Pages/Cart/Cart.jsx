@@ -34,7 +34,7 @@ useEffect(()=>{
         {cartSummary.cartLength <1 &&
         (<div className="flex font-bold h-96 items-center justify-center">
             <p>سبد خریدتان خالی است.</p>
-          </div>)}
+          </div>)}  
 
         {cartSummary.cartLength >=1 &&
         (<div className="flex justify-between m-8 h-1/2 gap-8">
