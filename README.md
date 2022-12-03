@@ -1,4 +1,13 @@
-# online-shop
+# Melodica (an online shop)
+
+## Previews
+
+https://user-images.githubusercontent.com/103171587/205437622-6d69139d-9ef2-479f-9da8-d5cc6ef7c768.mp4
+
+https://user-images.githubusercontent.com/103171587/205437586-09fb0472-ccb3-4c3b-aa77-c6c568c3e646.mp4
+
+https://user-images.githubusercontent.com/103171587/205437591-0501e79e-ac02-48e1-a9fb-9aa1dcb2a440.mp4
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
